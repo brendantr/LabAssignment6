@@ -1,9 +1,32 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int search(int numbers[], int low, int high, int value) 
-{
-	// line
-	return -1;
+// Bin Search Function
+// Pass in ordered int-array
+// Using Recursion
+int search(int numbers[], int low, int high, int value) {
+    
+	// If 0 is less than or equal to numItems 
+	if (low <= high) {
+
+		// Initialize Variable to Represent Mid
+        int mid = low + (high - low) / 2;
+
+        // Terminating Condition
+        // If element is present at the middle itself
+        if (numbers[mid] == value)
+            return mid;
+
+        // If the element is smaller than mid, then it can only be present in left subarray
+        if (numbers[mid] > value)
+            return search(numbers, low, mid - 1, value);
+
+        // Else the element can only be present in right subarray
+        return search(numbers, mid + 1, high, value);
+    }
+
+    // Element is not present in array
+    return -1;
 }
 
 void printArray(int numbers[], int sz)
